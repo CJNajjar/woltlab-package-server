@@ -66,8 +66,8 @@ class UpdatePackage
 		{
 			$version->appendChild($this->createExcludedPackages($packageArr));
 		}
-		$version->appendChild($this->doc->createElement("updatetype", $packageArr["updateType"]));
-		$version->appendChild($this->doc->createElement("timestamp", $packageArr["timestamp"]));
+		$version->appendChild($this->doc->createCDATAElement("updatetype", $packageArr["updateType"]));
+		$version->appendChild($this->doc->createCDATAElement("timestamp", $packageArr["timestamp"]));
 		
 		return $version;
 	}
@@ -78,7 +78,7 @@ class UpdatePackage
 		
 		foreach($packageArr["excludedPackages"] as $excludedpackageTmp)
 		{
-			$excludedpackage = $this->doc->createElement("excludedpackage", $excludedpackageTmp["name"]);
+			$excludedpackage = $this->doc->createCDATAElement("excludedpackage", $excludedpackageTmp["name"]);
 			
 			$excludedpackage->appendChild($this->doc->createSimpleAttribute("version", $excludedpackageTmp["version"]));
 			
@@ -94,7 +94,7 @@ class UpdatePackage
 		
 		foreach($packageArr["requiredPackages"] as $requiredpackageTmp)
 		{
-			$requiredpackage = $this->doc->createElement("requiredpackage", $requiredpackageTmp["name"]);
+			$requiredpackage = $this->doc->createCDATAElement("requiredpackage", $requiredpackageTmp["name"]);
 			
 			$requiredpackage->appendChild($this->doc->createSimpleAttribute("minversion", $requiredpackageTmp["minversion"]));
 			
@@ -108,8 +108,8 @@ class UpdatePackage
 	{
 		$authorinformation = $this->doc->createElement("authorinformation");
 		
-		$authorinformation->appendChild($this->doc->createElement("author", $packageArr["author"]));
-		$authorinformation->appendChild($this->doc->createElement("authorurl", $packageArr["authorUrl"]));
+		$authorinformation->appendChild($this->doc->createCDATAElement("author", $packageArr["author"]));
+		$authorinformation->appendChild($this->doc->createCDATAElement("authorurl", $packageArr["authorUrl"]));
 		
 		return $authorinformation;
 	}
@@ -118,8 +118,8 @@ class UpdatePackage
 	{
 		$packageinformation = $this->doc->createElement("packageinformation");
 		
-		$packageinformation->appendChild($this->doc->createElement("packagename", $packageArr["packageName"]));
-		$packageinformation->appendChild($this->doc->createElement("packagedescription", $packageArr["packageDescription"]));
+		$packageinformation->appendChild($this->doc->createCDATAElement("packagename", $packageArr["packageName"]));
+		$packageinformation->appendChild($this->doc->createCDATAElement("packagedescription", $packageArr["packageDescription"]));
 		
 		return $packageinformation;
 	}

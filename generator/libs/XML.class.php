@@ -15,4 +15,11 @@ class XML extends \DOMDocument
 		$attr->value = $value;
 		return $attr;
 	}
+	
+	public function createCDATAElement($name, $value)
+	{
+		$element = $this->createElement($name);
+		$element->appendChild($this->createCDATASection($value));
+		return $element;
+	}
 }
