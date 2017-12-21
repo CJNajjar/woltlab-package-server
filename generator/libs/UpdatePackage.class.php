@@ -58,6 +58,10 @@ class UpdatePackage
 		$version->appendChild($this->doc->createSimpleAttribute("name", $packageArr["version"]));
 		$version->appendChild($this->doc->createSimpleAttribute("accessible", "true"));
 		$version->appendChild($this->doc->createSimpleAttribute("requireAuth", "false"));
+		if (count($packageArr["fromVersions"]) > 0)
+		{
+			$version->appendChild($this->createFromVersions($packageArr));
+		}
 		if (count($packageArr["requiredPackages"]) > 0)
 		{
 			$version->appendChild($this->createRequiredPackages($packageArr));
@@ -70,6 +74,20 @@ class UpdatePackage
 		$version->appendChild($this->doc->createCDATAElement("timestamp", $packageArr["timestamp"]));
 		
 		return $version;
+	}
+	
+	private function createFromVersions($packageArr)
+	{
+		$fromversions = $this->doc->createElement("fromversions");
+		
+		foreach($packageArr["fromVersions"] as $fromversionTmp)
+		{
+			$fromversion = $this->doc->createCDATAElement("fromversion", $fromversionTmp);
+			
+			$fromversions->appendChild($fromversion);
+		}
+		
+		return $fromversions;
 	}
 	
 	private function createExcludedPackages($packageArr)
